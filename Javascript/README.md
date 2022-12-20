@@ -1,6 +1,7 @@
 # Javascript
 
 - [실행 컨텍스트](#실행-컨텍스트-execution-context)
+- [이벤트 루프](#이벤트-루프)
 - [Dom, 가상 Dom](#dom-가상-dom)
 - [이벤트 버블링, 이벤트 캡쳐링](#이벤트-버블링-이벤트-캡쳐링)
 - [URL 을 입력하고 벌어지는 일](#url-을-입력하고-벌어지는-일)
@@ -115,6 +116,67 @@ JS의 Excution stack은 LIFO(후입 선출법 last-in, first-out) 구조로 이�
 - 모던 JavsScript DeepDive
 - [[10분 테코톡] 하루의 실행 컨텍스트](https://www.youtube.com/watch?v=EWfujNzSUmw)
 - [실행 컨텍스트](https://velog.io/@deli-ght/%EC%8B%A4%ED%96%89-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8#%EC%8B%A4%ED%96%89-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EC%9D%98-%EA%B5%AC%EC%A1%B0)
+
+## 이벤트 루프
+
+JavaScript의 런타임 모델은 코드의 실행, 이벤트의 수집과 처리, 큐에 대기 중인 하위 작업을 처리하는 <b>이벤트 루프</b>에 기반하고 있다.
+
+### 1 런타임 개념
+
+### 시각적 표현
+![자바스크립트 런타임 모델 시각적 표현](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop/the_javascript_runtime_environment_example.svg)
+
+### 1.1 스택
+함수의 호출들은 '프레임' 스택을 형성합니다.
+
+```javascript
+function foo(b) {
+  let a = 10
+  return a + b + 11
+}
+
+function bar(x) {
+  let y = 3
+  return foo(x * y)
+}
+
+const baz = bar(7) // 42를 baz에 할당
+```
+
+위 코드의 실행 순서는 다음과 같습니다.
+
+1. bar를 호출할 때, bar의 인수와 지역 변수를 포함하는 첫 번째 프레임이 생성됩니다.
+1. bar가 foo를 호출할 때, foo의 인수와 지역 변수를 포함하는 두 번째 프레임이 생성되어 첫 번째 프레임의 위로 푸시됩니다.
+1. foo가 반환하면, 맨 위의 프레임 요소를 스택 밖으로 꺼냅니다. (bar 호출 프레임만 남음)
+1. bar가 반환하면, 스택이 빕니다.
+
+인수와 지역 변수는 스택 바깥에 저장되므로 바깥 함수가 반환한 후에도 계속 존재할 수 있습니다. 중첩 함수에서 지역 변수에 접근할 수 있는 이유가 이것입니다.
+
+### 1.2 힙
+객체는 힙에 할당됩니다. 힙은 단순히 메모리의 큰 (그리고 대부분 구조화되지 않은) 영역을 지칭하는 용어입니다.
+
+### 1.3 큐
+JavaScript 런타임은 메시지 큐, 즉 처리할 메시지의 대기열을 사용합니다. 각각의 메시지에는 메시지를 처리하기 위한 함수가 연결돼있습니다.
+
+이벤트 루프의 임의 시점에, 런타임은 대기열에서 가장 오래된 메시지부터 큐에서 꺼내 처리하기 시작합니다. 이를 위해 런타임은 꺼낸 메시지를 매개변수로, 메시지에 연결된 함수를 호출합니다. 다른 함수와 마찬가지로, 호출로 인한 새로운 스택 프레임도 생성됩니다.
+
+함수 처리는 스택이 다시 텅 빌 때까지 계속됩니다. 그 후, 큐에 메시지가 남아있으면 같은 방법으로 처리를 계속 진행합니다.
+
+### 2 이벤트 루프
+Event Loop는 Call Stack과 Callback Queue의 상태를 체크하여,<br>
+<b>Call Stack이 빈 상태가 되면, Callback Queue의 첫번째 콜백을 Call Stack으로 밀어넣는다.</b>
+이러한 반복적인 행동을 <b>틱(tick)</b> 이라 부른다.
+
+> 정리하면,
+> - V8 엔진에서 코드가 실행되면, Call Stack에 쌓인다.
+> - Stack의 선입후출의 룰에 따라 제일 마지막에 들어온 함수가 먼저 실행되며, Stack에 쌓여진 함수가 모두 실행된다.
+>   - 비동기함수가 실행된다면, Web API가 호출된다.
+>   - Web API는 비동기함수의 콜백함수를 Callback Queue에 밀어넣는다.
+>   - Event Loop는 Call Stack이 빈 상태가 되면 Callback Queue에 있는 첫번째 콜백을 Call Stack으로 이동시킨다.(이러한 반복적인 행동을 틱(tick)이라 한다.)
+
+<b>자바스크립트를 단일 스레드 프로그래밍 언어라 한번에 하나씩 밖에 실행할 수 없다.
+
+그러나 Web API, Callback Queue, Event Loop 덕분에 멀티 스레드 처럼 보여진다.</b>
 
 ## Dom, 가상 Dom
 
