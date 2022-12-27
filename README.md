@@ -12,3 +12,6 @@
 - React
 - React.memo vs useMemo
 - useMemo vs useCallback
+
+## [Web](https://github.com/okdol1/CS-Notes/tree/main/Web)
+- CORS
