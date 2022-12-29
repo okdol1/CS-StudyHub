@@ -6,6 +6,7 @@
 - [이벤트 버블링, 이벤트 캡쳐링](#이벤트-버블링-이벤트-캡쳐링)
 - [URL 을 입력하고 벌어지는 일](#url-을-입력하고-벌어지는-일)
 - [브라우저의 동작 원리](#브라우저의-동작-원리)
+- [Promise](#promise)
 
 ## 실행 컨텍스트 (Execution Context)
 
@@ -177,6 +178,10 @@ Event Loop는 Call Stack과 Callback Queue의 상태를 체크하여,<br>
 <b>자바스크립트를 단일 스레드 프로그래밍 언어라 한번에 하나씩 밖에 실행할 수 없다.
 
 그러나 Web API, Callback Queue, Event Loop 덕분에 멀티 스레드 처럼 보여진다.</b>
+
+### 참고
+- [이벤트 루프](https://developer.mozilla.org/ko/docs/Web/JavaScript/EventLoop)
+- [Event Loop (이벤트 루프)](https://velog.io/@thms200/Event-Loop-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84)
 
 ## Dom, 가상 Dom
 
@@ -375,3 +380,14 @@ https://csstriggers.com/
 
 - [[10분 테코톡] 체프의 브라우저 렌더링](https://www.youtube.com/watch?v=sJ14cWjrNis)
 - [[면접준비] 프론트엔드 개발자 취업 면접 질문 및 답변 정리(64문)](https://amyhyemi.tistory.com/224)
+
+## Promise
+
+### 1 Promise란?
+콜백헬을 개선시키기 위해 등장한 패턴으로 Promise는 향후 언젠가 사용하게 될 값을 생산해내는 객체
+
+### 2 Promise 3가지 상태
+fullfiled, pending, rejected 상태가 있습니다.
+- fullfiled : 비동기처리가 성공적으로 수행된 상태
+- rejected : 비동기처리가 실패로 수행된 상태
+- pending : 비동기처리가 아직 수행되지 않은 상태
