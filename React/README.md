@@ -3,6 +3,7 @@
 - [React?](#react-1)
 - [React.memo vs useMemo](#reactmemo-vs-usememo)
 - [useMemo vs useCallback](#usememo-vs-usecallback)
+- [Redux](#redux)
 
 ## React?
 - Facebook에서 제공한 프론트엔드 라이브러리
@@ -58,3 +59,12 @@ CRA에는 3가지 라이브러리가 포함되어 있음
 
 ### 2 차이점
 - 둘의 차이점은 useCallback은 전달된 함수 그 자체를 캐싱하지만, useMemo는 전달된 함수가 실행되고 반환된 결과를 캐싱한다는 것이다.(=useMemo는 메모이제이션 된 값을 반환하고 useCallback은 메모이제이션 된 콜백을 반환한다.)
+
+## Redux
+
+### 1 Redux란?
+redux는 state를 편리하게 관리하기 위한 상태관리 라이브러리입니다.
+
+### 2 Redux 사용법
+redux는 하나의 커다란 store라는 state가 존재하는데 여기서 전체 state를 총괄합니다. 이 state는 직접 변경할 수 없고 순수함수인 reducer로 변경하는 것이 가능합니다.
+리듀소는 type과 payload를 속성으로 갖는 단순 객체인 action 이벤트가 발생했을 때 작동하고 action 이벤트는 dispatch라는 함수에 단순 객체인 action을 넣어 발생시킬 수 있습니다.
