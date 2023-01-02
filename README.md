@@ -14,6 +14,7 @@
 - React.memo vs useMemo
 - useMemo vs useCallback
 - Redux
+- 왜 state를 직접 변경하지 않고 setState를 이용하나요?
 
 ## [Web](https://github.com/okdol1/CS-Notes/tree/main/Web)
 - CORS
