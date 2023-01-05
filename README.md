@@ -19,3 +19,4 @@
 ## [Web](https://github.com/okdol1/CS-Notes/tree/main/Web)
 - CORS
 - HTTP 상태 코드
+- 브라우저 렌더링 원리
