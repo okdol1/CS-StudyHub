@@ -2,6 +2,7 @@
 
 - [CORS](#cors)
 - [HTTP 상태 코드](#http-상태-코드)
+- [브라우저 렌더링 원리](#브라우저-렌더링-원리)
 
 ## CORS
 
@@ -62,3 +63,10 @@ HTTP 상태 코드는 클라이언트가 보낸 HTTP 요청에 대한 서버의 
 
 - 500 Internal Server Error : 서버 문제로 오류 발생, 애매하면 500 오류
 - 503 Service Unavailable : 서비스 이용 불가
+
+## 브라우저 렌더링 원리
+
+1. DOM, CSSOM생성: 가장 첫번째 단계로 서버로부터 받은 HTML, CSS를 다운받는다 → 단순한 텍스트인 HTML, CSS파일을 Object Model로 만든다. HTML은 DOM으로, CSS는 CSSOM으로 만들어진다. (html이 여기서 파싱된다) DOM Tree와 CSSOM Tree가 만들어진다
+2. Render Tree생성: DOM Tree와 CSSOM Tree가 만들어졌으면 그 다음으로는 이 둘을 이용하여 Render Tree를 생성한다. 렌더트리에는 스타일 정보가 설정되어있고, 실제 화면에 표현되는 노드들로 구성된다. 
+3. Layout 단계: 브라우저의 뷰포트(Viewport) 내에서 각 노드들의 정확한 위치와 크기를 계산한다. 생성된 Render Tree 노드들이 가지고 있는 스타일과 속성에 따라서 브라우저 화면의 어느위치에 어느크기로 출력될지 계산하는 단계이다.(reflow 단계) 레이아웃 단계에서 %, vh, vw와 같이 상대적인 위치, 크기 속성은 실제 화면에 그려지는 픽셀 단위로 변환된다. 
+4. Paint: Layout 계산이 완료되면 이제 요소들을 실제 화면을 그리게 된다.(repaint 단계) 처리해야하는 스타일이 복잡할수록 paint 단계에 소요되는 시간이 길다. (가령 그라데이션, 그림자 효과 > 단색 배경) 
