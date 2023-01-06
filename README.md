@@ -8,6 +8,7 @@
 - URL 을 입력하고 벌어지는 일
 - 브라우저의 동작 원리
 - Promise
+- 호이스팅
 
 ## [React](https://github.com/okdol1/CS-Notes/tree/main/React)
 - React
