@@ -9,6 +9,7 @@
 - 브라우저의 동작 원리
 - Promise
 - 호이스팅
+- 클로저
 
 ## [React](https://github.com/okdol1/CS-Notes/tree/main/React)
 - React
