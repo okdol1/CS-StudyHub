@@ -10,6 +10,7 @@
 - Promise
 - 호이스팅
 - 클로저
+- this
 
 ## [React](https://github.com/okdol1/CS-Notes/tree/main/React)
 - React
