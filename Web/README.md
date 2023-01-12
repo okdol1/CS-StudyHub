@@ -3,6 +3,7 @@
 - [CORS](#cors)
 - [HTTP Method](#http-method)
 - [HTTP 상태 코드](#http-상태-코드)
+- [HTTP 헤더](#http-헤더)
 - [브라우저 렌더링 원리](#브라우저-렌더링-원리)
 - [브라우저 저장소 차이점](#브라우저-저장소-차이점)
 
@@ -79,6 +80,74 @@ HTTP 상태 코드는 클라이언트가 보낸 HTTP 요청에 대한 서버의 
 
 - 500 Internal Server Error : 서버 문제로 오류 발생, 애매하면 500 오류
 - 503 Service Unavailable : 서비스 이용 불가
+
+## HTTP 헤더
+
+요청/응답 헤더 및 본문 헤더 등 다양한 속성들이 있지만 여기선 주요한 속성들만 명시한다.
+
+### 요청 헤더
+
+- Host : 서버의 도메인 이름과 TCP 포트번호 (표준 포트는 생략 가능)
+
+  - ```
+    Host: en.wikipedia.org:8080
+    ```
+
+- Content-Type : POST/PUT 메서드를 사용할 때 본문의 타입
+
+  - ```
+    Content-Type: application/x-www-form-urlencoded
+    ```
+
+- If-Modified-Since : 명시한 날짜 이후로 변경된 리소스만 획득
+
+  - ```
+    If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+    ```
+
+- Origin : 요청이 어느 도메인에서 왔는지 명시, 서버의 `Access-Control-*` 속성에 필요
+
+  - ```
+    Origin: http://www.example-social-network.com
+    ```
+
+- Cookie : 서버의 `Set-Cookie` 로 설정된 쿠키 값
+
+  - ```
+    Cookie: $Version=1; Skin=new;
+    ```
+
+### 응답 헤더
+
+- Access-Control-\* : CORS를 허용하기 위한 웹사이트 명시
+
+  - ```
+    Access-Control-Allow-Origin: *
+    ```
+
+- Set-Cookie : 클라이언트에 쿠키 설정
+
+  - ```
+    Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1
+    ```
+
+- Last-Modified : 요청한 리소스가 마지막으로 변경된 시각
+
+  - ```
+    Last-Modified: Tue, 15 Nov 1994 12:45:26 GMT
+    ```
+
+- Location : 3xx 상태 코드일 때, 리다이렉션 되는 주소
+
+  - ```
+    Location: http://www.w3.org/pub/WWW/People.html
+    ```
+
+- Allow : 요청한 리소스에 대해 가능한 메서드들
+
+  - ```
+    Allow: GET, HEAD
+    ```
 
 ## 브라우저 렌더링 원리
 

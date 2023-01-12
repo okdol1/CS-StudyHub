@@ -26,5 +26,6 @@
 - CORS
 - HTTP Method
 - HTTP 상태 코드
+- HTTP 헤더
 - 브라우저 렌더링 원리
 - 브라우저 저장소 차이점
